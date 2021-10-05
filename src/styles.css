@@ -1,0 +1,39 @@
+:root {
+  --background-primary: black;
+  --foreground-primary: white;
+  --link-text-primary: white;
+  --link-text-active-primary: red;
+
+  --background-accent: red;
+  --foreground-accent: white;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+header nav {
+  background-color: var(--background-primary);
+  color: var(--foreground-primary);
+}
+
+header nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 12px;
+}
+
+header nav ul li {
+  padding: 12px 0px 12px 12px;
+}
+
+header nav ul li a {
+  color: var(--link-text-primary);
+}
+
+header nav ul li a.nav-active {
+  color: var(--link-text-active-primary);
+}
