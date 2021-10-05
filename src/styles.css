@@ -4,18 +4,29 @@
   --link-text-primary: white;
   --link-text-active-primary: red;
 
+  --background-secondary: darkgray;
+  --foreground-secondary: black;
+  --link-text-secondary: black;
+  --link-text-active-secondary: red;
+
   --background-accent: red;
   --foreground-accent: white;
+
+  /* Spacing variables */
+  --content-padding: 12px;
 }
 
 body {
   margin: 0;
   padding: 0;
-}
-
-header nav {
   background-color: var(--background-primary);
   color: var(--foreground-primary);
+}
+
+/* Navigation styles */
+header nav {
+  background-color: var(--background-secondary);
+  color: var(--foreground-secondary);
 }
 
 header nav ul {
@@ -23,17 +34,24 @@ header nav ul {
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 12px;
+  gap: var(--content-padding);
 }
 
 header nav ul li {
-  padding: 12px 0px 12px 12px;
+  padding: var(--content-padding) 0px var(--content-padding)
+    var(--content-padding);
 }
 
 header nav ul li a {
-  color: var(--link-text-primary);
+  color: var(--link-text-secondary);
 }
 
 header nav ul li a.nav-active {
-  color: var(--link-text-active-primary);
+  color: var(--link-text-active-secondary);
+}
+
+/* Various Header styles */
+section {
+  padding-left: var(--content-padding);
+  padding-right: var(--content-padding);
 }
