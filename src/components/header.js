@@ -5,8 +5,8 @@ export default function header(currentPage = "") {
 
   const links = [
     navItem("/", "Home"),
-    navItem("/page/runes.html", "Runes"),
-    navItem("/page/runewords.html", "Rune Words"),
+    navItem("/runes.html", "Runes"),
+    navItem("/runewords.html", "Rune Words"),
   ];
 
   links.forEach((link) => {
