@@ -1,4 +1,4 @@
-export default function header(currentPage = "") {
+export default function header() {
   const nav = document.createElement("nav");
   const ul = document.createElement("ul");
   nav.append(ul);
@@ -17,7 +17,7 @@ export default function header(currentPage = "") {
   document.querySelector("header").append(nav);
 
   // Set the active page
-  setActiveNavigation(currentPage);
+  setActiveNavigation();
 }
 
 export function navItem(href, text) {
@@ -30,15 +30,15 @@ export function navItem(href, text) {
   return li;
 }
 
-function setActiveNavigation(currentPage) {
+function setActiveNavigation() {
+  const currentPage = window.location.href;
   const headerNavs = document.querySelectorAll("header nav ul li a");
-  console.log(headerNavs);
 
   let navIndex = 0;
   for (navIndex = 0; navIndex < headerNavs.length; navIndex++) {
-    const linkHref = headerNavs[navIndex].href.split("/page/", 2)[1];
-    const currentHref = currentPage.split("/page/", 2)[1];
-    if (linkHref === currentHref) {
+    const linkHref = headerNavs[navIndex].href;
+
+    if (linkHref === currentPage) {
       headerNavs[navIndex].classList.add("nav-active");
     }
   }

@@ -1,10 +1,10 @@
-import runes from "../data/runes.js";
-import wordsOriginal from "../data/original-words.js";
-import words110 from "../data/1.10-words.js";
-import words110Ladder from "../data/1.10-ladder-words.js";
-import words111 from "../data/1.11-words.js";
+import runes from "./data/runes.js";
+import wordsOriginal from "./data/original-words.js";
+import words110 from "./data/1.10-words.js";
+import words110Ladder from "./data/1.10-ladder-words.js";
+import words111 from "./data/1.11-words.js";
 
-import calculateMinLevel from "../utilities/calculate-level.js";
+import calculateMinLevel from "./utilities/calculate-level.js";
 
 console.log(runes);
 

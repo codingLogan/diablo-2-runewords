@@ -1,3 +1,3 @@
-import header from "../components/header.js";
+import header from "./components/header.js";
 
-header("/page/runewords.html");
+header();
