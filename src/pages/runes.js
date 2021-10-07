@@ -1,3 +1,9 @@
-import header from "../components/header.js";
+import runes from "../data/runes.js";
 
-header();
+// Render all the runes
+const runesSection = document.getElementById("runes");
+runes.forEach((rune) => {
+  const runeDiv = document.createElement("div");
+  runeDiv.innerText = rune.name;
+  runesSection.append(runeDiv);
+});
