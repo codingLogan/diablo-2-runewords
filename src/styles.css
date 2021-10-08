@@ -64,7 +64,6 @@ header nav ul li a.nav-active {
   color: var(--link-text-active-secondary);
 }
 
-/* Various Header styles */
 section {
   padding-left: var(--content-padding);
   padding-right: var(--content-padding);
