@@ -19,12 +19,26 @@
 body {
   margin: 0;
   padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
   background-color: var(--background-primary);
   color: var(--foreground-primary);
 }
 
+main {
+  flex-grow: 1;
+}
+
 /* Navigation styles */
-header nav {
+footer {
+  text-align: center;
+  padding: var(--content-padding);
+  margin-top: var(--content-padding);
+}
+
+header nav,
+footer {
   background-color: var(--background-secondary);
   color: var(--foreground-secondary);
 }
