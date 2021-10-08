@@ -1,8 +1,5 @@
 import { getRuneWords } from "../data/runeWords.js";
-import runewordTable, {
-  renderTableTo,
-  tableActions,
-} from "../components/runewordTable.js";
+import { renderTableTo } from "../components/runewordTable.js";
 
 const runewords = getRuneWords();
 const runewordsSection = document.getElementById("runewords");
