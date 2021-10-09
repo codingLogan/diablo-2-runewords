@@ -8,7 +8,18 @@ export default class RunewordsController {
    */
   constructor(runewordsUI, runewords) {
     this.ui = runewordsUI;
-    this.setState(runewords);
+    this.setState(this.addFilteringProps(runewords));
+  }
+
+  /**
+   *
+   * @param {Array} runewords
+   */
+  addFilteringProps(runewords) {
+    return runewords.map((word) => ({
+      ...word,
+      filtered: false,
+    }));
   }
 
   setState(runewords) {
