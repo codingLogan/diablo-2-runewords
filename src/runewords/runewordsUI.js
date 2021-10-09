@@ -78,14 +78,43 @@ export default class RunewordsUI {
     return list;
   }
 
+  createActionButton(text, onClick) {
+    const actionButton = document.createElement("button");
+    actionButton.innerText = text;
+    actionButton.onclick = onClick;
+    return actionButton;
+  }
+
+  // Runeword action bar
+  /**
+   *
+   * @param {Object} actionMap {name: functionToTrigger}
+   */
+  runewordActions(sortAction) {
+    const actionDiv = document.createElement("div");
+    actionDiv.id = "runeword-actions";
+
+    const buttons = [
+      this.createActionButton("Name", () => sortAction("name")),
+      this.createActionButton("Level", () => sortAction("minLevelForRune")),
+    ];
+
+    buttons.forEach((button) => {
+      actionDiv.appendChild(button);
+    });
+
+    return actionDiv;
+  }
+
   clearUI(container) {
     while (container.firstChild) {
       container.removeChild(container.firstChild);
     }
   }
 
-  render(runewords) {
+  render(runewords, sortAction) {
     this.clearUI(this.container);
+    this.container.appendChild(this.runewordActions(sortAction));
     this.container.appendChild(this.runewordList(runewords));
   }
 }

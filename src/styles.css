@@ -38,6 +38,14 @@ ul {
   padding: 0;
 }
 
+/* Runeword actions div */
+#runeword-actions {
+  display: flex;
+  gap: var(--spacing-xtiny);
+  margin: var(--spacing-medium);
+  justify-content: center;
+}
+
 /* Styles for header blocks with subtitles */
 .header-block h3,
 .header-block h4 {

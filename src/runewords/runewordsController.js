@@ -8,8 +8,7 @@ export default class RunewordsController {
    */
   constructor(runewordsUI, runewords) {
     this.ui = runewordsUI;
-    this.state = runewords;
-    this.ui.render(this.state);
+    this.setState(runewords);
   }
 
   setState(runewords) {
@@ -21,7 +20,7 @@ export default class RunewordsController {
 
     this.state = runewords;
 
-    this.ui.render(this.state);
+    this.ui.render(this.state, this.sortWordsBy.bind(this));
   }
 
   sortWordsBy(propertyName) {
