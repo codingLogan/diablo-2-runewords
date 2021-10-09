@@ -2,7 +2,7 @@
  *
  * @param {Object} dataColumns - {wordKey: label...}
  */
-export default function runewordTable(
+export default function runewordContainer(
   runewords,
   dataColumns = { name: "Name", minLevelForRune: "Level", sockets: "Sockets" },
   displayOptions = {}
@@ -49,7 +49,7 @@ export function renderTableTo(
   // Render the actions and the table below it
   containerElement.appendChild(tableActions());
   containerElement.appendChild(
-    runewordTable(runewords, dataColumns, displayOptions)
+    runewordContainer(runewords, dataColumns, displayOptions)
   );
 }
 
