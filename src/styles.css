@@ -13,8 +13,9 @@
   --foreground-accent: white;
 
   /* Spacing variables */
-  --content-padding: 12px;
+  --spacing-medium: 12px;
   --spacing-tiny: 8px;
+  --spacing-xtiny: 4px;
 }
 
 body {
@@ -59,7 +60,7 @@ ul {
 }
 
 #runewords > ul > li {
-  margin-bottom: var(--spacing-tiny);
+  margin-bottom: var(--spacing-xtiny);
 }
 
 .runeword-effects {
@@ -68,16 +69,20 @@ ul {
 }
 
 /* Navigation styles */
-footer {
-  text-align: center;
-  padding: var(--content-padding);
-  margin-top: var(--content-padding);
+header {
+  margin-bottom: var(--spacing-medium);
 }
 
-header nav,
-footer {
+footer,
+header {
+  text-align: center;
   background-color: var(--background-secondary);
   color: var(--foreground-secondary);
+}
+
+footer {
+  padding: var(--spacing-medium);
+  margin-top: var(--spacing-medium);
 }
 
 header nav ul {
@@ -85,12 +90,11 @@ header nav ul {
   margin: 0;
   padding: 0;
   display: flex;
-  gap: var(--content-padding);
+  gap: var(--spacing-medium);
 }
 
 header nav ul li {
-  padding: var(--content-padding) 0px var(--content-padding)
-    var(--content-padding);
+  padding: var(--spacing-medium) 0px var(--spacing-medium) var(--spacing-medium);
 }
 
 header nav ul li a {
@@ -102,6 +106,6 @@ header nav ul li a.nav-active {
 }
 
 section {
-  padding-left: var(--content-padding);
-  padding-right: var(--content-padding);
+  padding-left: var(--spacing-medium);
+  padding-right: var(--spacing-medium);
 }

@@ -54,6 +54,7 @@ export default class RunewordsUI {
     // List of Effects
     const effectList = document.createElement("ul");
     effectList.classList.add("runeword-effects");
+    effectList.hidden = true;
 
     effects.forEach((effect) => {
       const effectItem = document.createElement("li");
