@@ -26,6 +26,7 @@ body {
   flex-direction: column;
   background-color: var(--background-primary);
   color: var(--foreground-primary);
+  font-family: Arial, Helvetica, Sans-Serif;
 }
 
 main {
@@ -60,6 +61,7 @@ ul {
   background-color: var(--background-secondary);
   color: var(--foreground-secondary);
   padding: var(--spacing-tiny);
+  cursor: pointer;
 }
 
 .flex-apart {
@@ -74,6 +76,7 @@ ul {
 .runeword-effects {
   text-align: center;
   border: 1px solid var(--background-secondary);
+  padding: var(--spacing-xtiny);
 }
 
 /* Navigation styles */

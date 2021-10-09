@@ -34,7 +34,7 @@ export default class RunewordsUI {
     titleLeft.innerText = name;
     titleDiv.appendChild(titleLeft);
 
-    const titleRight = document.createElement("h4");
+    const titleRight = document.createElement("span");
     titleRight.innerText = `Level ${minLevelForRune}`;
     titleDiv.appendChild(titleRight);
 
@@ -43,11 +43,11 @@ export default class RunewordsUI {
     subtitleDiv.classList.add("flex-apart");
     itemHeader.appendChild(subtitleDiv);
 
-    const subtitleLeft = document.createElement("h4");
-    subtitleLeft.innerText = `${sockets} Sockets`;
+    const subtitleLeft = document.createElement("span");
+    subtitleLeft.innerText = `(${sockets}) ${runeOrder}`;
     subtitleDiv.appendChild(subtitleLeft);
 
-    const subtitleRight = document.createElement("h4");
+    const subtitleRight = document.createElement("span");
     subtitleRight.innerText = itemType;
     subtitleDiv.appendChild(subtitleRight);
 
