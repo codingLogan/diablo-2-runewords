@@ -22,12 +22,29 @@ function runewordSortTest(runewords, sortProperty) {
 
 test("Runewords get sorted by minLevelForRune", () => {
   runewordsController.sortWordsBy("minLevelForRune");
-  const runewords = runewordsController.state;
-
-  runewordSortTest([...runewords], "minLevelForRune");
+  runewordSortTest([...runewordsController.runewords], "minLevelForRune");
 });
 
 test("Runewords get sorted by name", () => {
   runewordsController.sortWordsBy("name");
-  runewordSortTest([...runewordsController.state], "name");
+  runewordSortTest([...runewordsController.runewords], "name");
+});
+
+test("Runewords can be filtered by level", () => {
+  const maxRuneLevel = 30;
+  runewordsController.maxLevelFilter(maxRuneLevel);
+  const runewords = [...runewordsController.runewords];
+
+  let i = 0;
+  for (i = 0; i < runewords.length; i++) {
+    const word = runewords[i];
+    if (word.minLevelForRune <= maxRuneLevel) {
+      expect(word.filtered).toBe(false);
+    } else {
+      expect(word.filtered).toBe(true);
+    }
+  }
+
+  const filteredList = runewords.filter((word) => word.filtered === false);
+  expect(filteredList.length).toBe(19);
 });
