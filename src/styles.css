@@ -4,6 +4,9 @@
   --link-text-primary: white;
   --link-text-active-primary: red;
 
+  --card-background: #20100a;
+  --card-foreground: var(--foreground-primary);
+
   --background-secondary: darkgray;
   --foreground-secondary: black;
   --link-text-secondary: black;
@@ -57,11 +60,16 @@ ul {
   margin-top: 0;
 }
 
+.header-block h3 {
+  color: #908858;
+}
+
 .header-block {
-  background-color: var(--background-secondary);
-  color: var(--foreground-secondary);
+  background-color: var(--card-background);
+  color: var(--card-foreground);
   padding: var(--spacing-tiny);
   cursor: pointer;
+  border: 1px solid var(--link-text-active-secondary);
 }
 
 .flex-apart {
@@ -76,7 +84,9 @@ ul {
 .runeword-effects {
   text-align: center;
   border: 1px solid var(--background-secondary);
+  border-top: none;
   padding: var(--spacing-xtiny);
+  color: #4850a8;
 }
 
 /* Navigation styles */
