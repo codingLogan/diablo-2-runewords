@@ -52,7 +52,7 @@ test("Runewords can be filtered by level", () => {
 
 test("Runewords can be filtered by number of sockets", () => {
   // UI will probably be a radio of 1-6 as options
-  const showSockets = 3;
+  const showSockets = 6;
   runewordsController.filterBySocket(showSockets);
   const runewords = runewordsController.runewords;
 
@@ -66,6 +66,26 @@ test("Runewords can be filtered by number of sockets", () => {
     }
   }
 
-  // const filteredList = runewords.filter((word) => word.filtered === false);
-  // expect(filteredList.length).toBe(19);
+  const filteredList = runewords.filter((word) => word.filtered === false);
+  expect(filteredList.length).toBe(3);
+});
+
+test("App can show only sword runewords (filter by itemType)", () => {
+  // UI will probably be a radio of 1-6 as options
+  const filterValue = "Swords";
+  runewordsController.filterByItemType(filterValue);
+  const runewords = runewordsController.runewords;
+
+  let i = 0;
+  for (i = 0; i < runewords.length; i++) {
+    const word = runewords[i];
+    if (word.itemType.split("/").includes(filterValue)) {
+      expect(word.filtered).toBe(false);
+    } else {
+      expect(word.filtered).toBe(true);
+    }
+  }
+
+  const filteredList = runewords.filter((word) => word.filtered === false);
+  expect(filteredList.length).toBe(12);
 });

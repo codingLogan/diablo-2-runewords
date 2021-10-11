@@ -93,20 +93,27 @@ export default class RunewordsUI {
    * @param {Object} actionMap {name: functionToTrigger}
    */
   runewordActions(sortAction, filters) {
-    const { maxLevelFilter, filterBySocket } = filters;
+    const { maxLevelFilter, filterBySocket, filterByItemType } = filters;
     const actionDiv = document.createElement("div");
     actionDiv.id = "runeword-actions";
 
     const buttons = [
+      // Sorting Buttons
       this.createActionButton("Name", () => sortAction("name")),
       this.createActionButton("Level", () => sortAction("minLevelForRune")),
+      // Level Filterint
       this.createActionButton("Level 30", () => maxLevelFilter(30)),
+      // Socket Filtering
       this.createActionButton("All Sockets", () => filterBySocket(null)),
       this.createActionButton("Show 2 Sockets", () => filterBySocket(2)),
       this.createActionButton("Show 3 Sockets", () => filterBySocket(3)),
       this.createActionButton("Show 4 Sockets", () => filterBySocket(4)),
       this.createActionButton("Show 5 Sockets", () => filterBySocket(5)),
       this.createActionButton("Show 6 Sockets", () => filterBySocket(6)),
+      // Type Filtering
+      this.createActionButton("Swords", () => filterByItemType("Swords")),
+      this.createActionButton("Sheilds", () => filterByItemType("Shields")),
+      this.createActionButton("Helms", () => filterByItemType("Helms")),
     ];
 
     buttons.forEach((button) => {

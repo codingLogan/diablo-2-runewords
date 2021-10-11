@@ -14,3 +14,18 @@ export function getRuneWords() {
     })
   );
 }
+
+export function getItemTypes() {
+  const itemTypes = {};
+  getRuneWords().forEach((word) => {
+    word.itemType.split("/").forEach((type) => {
+      if (typeof itemTypes[type] === "undefined") {
+        itemTypes[type] = 0;
+      }
+      itemTypes[type]++;
+    });
+  });
+
+  const itemTypesArray = Object.keys(itemTypes).sort();
+  return itemTypesArray;
+}

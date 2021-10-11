@@ -1,5 +1,12 @@
 import RunewordsUI from "./runewordsUI.js";
 
+/**
+ * This controller handles the behavior and state for the UI
+ *
+ * This keeps most of the UI rendering logic out of the data
+ * The only behavior the UI knows about are the action functions
+ * that can be used from the UI interface
+ */
 export default class RunewordsController {
   /**
    *
@@ -13,6 +20,7 @@ export default class RunewordsController {
       filters: {
         maxLevel: null, // Number
         sockets: null, // Number
+        itemType: null, // String
       },
     });
   }
@@ -41,6 +49,7 @@ export default class RunewordsController {
     this.ui.render(this.runewords, this.sortWordsBy.bind(this), {
       maxLevelFilter: this.maxLevelFilter.bind(this),
       filterBySocket: this.filterBySocket.bind(this),
+      filterByItemType: this.filterByItemType.bind(this),
     });
   }
 
@@ -72,6 +81,17 @@ export default class RunewordsController {
 
       if (filters.sockets !== null && word.sockets !== filters.sockets) {
         return true;
+      }
+
+      if (filters.itemType !== null) {
+        // Question: does the word have the type we want?
+        // If not, filter it
+        const hasFilteredType = word.itemType
+          .split("/")
+          .includes(filters.itemType);
+        if (!hasFilteredType) {
+          return true;
+        }
       }
 
       return false;
@@ -106,6 +126,20 @@ export default class RunewordsController {
     const newFilters = {
       ...this.filters,
       sockets: numberOfSockets,
+    };
+
+    const newRunewords = this.applyFilters(this.runewords, newFilters);
+
+    this.setState({
+      runewords: newRunewords,
+      filters: newFilters,
+    });
+  }
+
+  filterByItemType(itemType) {
+    const newFilters = {
+      ...this.filters,
+      itemType: itemType,
     };
 
     const newRunewords = this.applyFilters(this.runewords, newFilters);
