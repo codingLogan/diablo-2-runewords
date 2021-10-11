@@ -6,10 +6,7 @@ const runewordsUI = {
   render: jest.fn(),
 };
 
-const runewordsController = new RunewordsController(
-  runewordsUI,
-  getRuneWords()
-);
+let runewordsController;
 
 function runewordSortTest(runewords, sortProperty) {
   let i = 1;
@@ -19,6 +16,10 @@ function runewordSortTest(runewords, sortProperty) {
     );
   }
 }
+
+beforeEach(() => {
+  runewordsController = new RunewordsController(runewordsUI, getRuneWords());
+});
 
 test("Runewords get sorted by minLevelForRune", () => {
   runewordsController.sortWordsBy("minLevelForRune");
@@ -47,4 +48,24 @@ test("Runewords can be filtered by level", () => {
 
   const filteredList = runewords.filter((word) => word.filtered === false);
   expect(filteredList.length).toBe(19);
+});
+
+test("Runewords can be filtered by number of sockets", () => {
+  // UI will probably be a radio of 1-6 as options
+  const showSockets = 3;
+  runewordsController.filterBySocket(showSockets);
+  const runewords = runewordsController.runewords;
+
+  let i = 0;
+  for (i = 0; i < runewords.length; i++) {
+    const word = runewords[i];
+    if (word.sockets === showSockets) {
+      expect(word.filtered).toBe(false);
+    } else {
+      expect(word.filtered).toBe(true);
+    }
+  }
+
+  // const filteredList = runewords.filter((word) => word.filtered === false);
+  // expect(filteredList.length).toBe(19);
 });

@@ -45,6 +45,7 @@ ul {
 /* Runeword actions div */
 #runeword-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--spacing-xtiny);
   margin: var(--spacing-medium);
   justify-content: center;

@@ -12,6 +12,7 @@ export default class RunewordsController {
       runewords: this.addFilteringProps(runewords),
       filters: {
         maxLevel: null, // Number
+        sockets: null, // Number
       },
     });
   }
@@ -39,6 +40,7 @@ export default class RunewordsController {
     this.state = newState;
     this.ui.render(this.runewords, this.sortWordsBy.bind(this), {
       maxLevelFilter: this.maxLevelFilter.bind(this),
+      filterBySocket: this.filterBySocket.bind(this),
     });
   }
 
@@ -61,7 +63,14 @@ export default class RunewordsController {
   // Logic for applying filters (determine new runewords state)
   applyFilters(runewords, filters) {
     const wordCheck = (word) => {
-      if (word.minLevelForRune > filters.maxLevel) {
+      if (
+        filters.maxLevel !== null &&
+        word.minLevelForRune > filters.maxLevel
+      ) {
+        return true;
+      }
+
+      if (filters.sockets !== null && word.sockets !== filters.sockets) {
         return true;
       }
 
@@ -90,6 +99,20 @@ export default class RunewordsController {
     this.setState({
       runewords: newRunewords,
       fiters: newFilters,
+    });
+  }
+
+  filterBySocket(numberOfSockets) {
+    const newFilters = {
+      ...this.filters,
+      sockets: numberOfSockets,
+    };
+
+    const newRunewords = this.applyFilters(this.runewords, newFilters);
+
+    this.setState({
+      runewords: newRunewords,
+      filters: newFilters,
     });
   }
 }
