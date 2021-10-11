@@ -72,7 +72,9 @@ export default class RunewordsUI {
     const list = document.createElement("ul");
 
     runewords.forEach((word) => {
-      list.appendChild(this.runewordItem(word));
+      if (word.filtered === false) {
+        list.appendChild(this.runewordItem(word));
+      }
     });
 
     return list;
@@ -90,13 +92,15 @@ export default class RunewordsUI {
    *
    * @param {Object} actionMap {name: functionToTrigger}
    */
-  runewordActions(sortAction) {
+  runewordActions(sortAction, filters) {
+    const { maxLevelFilter } = filters;
     const actionDiv = document.createElement("div");
     actionDiv.id = "runeword-actions";
 
     const buttons = [
       this.createActionButton("Name", () => sortAction("name")),
       this.createActionButton("Level", () => sortAction("minLevelForRune")),
+      this.createActionButton("Level 30", () => maxLevelFilter(30)),
     ];
 
     buttons.forEach((button) => {
@@ -112,9 +116,9 @@ export default class RunewordsUI {
     }
   }
 
-  render(runewords, sortAction) {
+  render(runewords, sortAction, filters) {
     this.clearUI(this.container);
-    this.container.appendChild(this.runewordActions(sortAction));
+    this.container.appendChild(this.runewordActions(sortAction, filters));
     this.container.appendChild(this.runewordList(runewords));
   }
 }
