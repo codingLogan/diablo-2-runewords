@@ -91,48 +91,29 @@ export default class RunewordsUI {
   /**
    *
    * @param {Array} actions [{action: function, actionValue: string, text: string}]
+   * @param {string} headerText creates a heaver for the actions
    */
-  runewordActions(actions) {
-    // const { maxLevelFilter, filterBySocket, filterByItemType } = filters;
+  runewordActions(actions, headerText = "") {
+    // Build a header for the filters
+    const actionHeader = document.createElement("h4");
+    actionHeader.innerText = headerText;
+
+    const actionSection = document.createElement("div");
+    actionSection.appendChild(actionHeader);
+
     const actionDiv = document.createElement("div");
     actionDiv.classList.add("runeword-actions");
-
-    // const actions = [
-    //   {
-    //     action: sortAction,
-    //     actionValue: "name",
-    //     text: "Name",
-    //   },
-    // ];
+    actionSection.appendChild(actionDiv);
 
     const buttons = actions.map(({ action, actionValue, text }) =>
       this.createActionButton(text, () => action(actionValue))
     );
 
-    // const buttons = [
-    //   // Sorting Buttons
-    //   this.createActionButton("Name", () => sortAction("name")),
-    //   this.createActionButton("Level", () => sortAction("minLevelForRune")),
-    //   // Level Filterint
-    //   this.createActionButton("Level 30", () => maxLevelFilter(30)),
-    //   // Socket Filtering
-    //   this.createActionButton("All Sockets", () => filterBySocket(null)),
-    //   this.createActionButton("Show 2 Sockets", () => filterBySocket(2)),
-    //   this.createActionButton("Show 3 Sockets", () => filterBySocket(3)),
-    //   this.createActionButton("Show 4 Sockets", () => filterBySocket(4)),
-    //   this.createActionButton("Show 5 Sockets", () => filterBySocket(5)),
-    //   this.createActionButton("Show 6 Sockets", () => filterBySocket(6)),
-    //   // Type Filtering
-    //   this.createActionButton("Swords", () => filterByItemType("Swords")),
-    //   this.createActionButton("Sheilds", () => filterByItemType("Shields")),
-    //   this.createActionButton("Helms", () => filterByItemType("Helms")),
-    // ];
-
     buttons.forEach((button) => {
       actionDiv.appendChild(button);
     });
 
-    return actionDiv;
+    return actionSection;
   }
 
   clearUI(container) {
@@ -147,18 +128,21 @@ export default class RunewordsUI {
     this.clearUI(this.container);
     // Build sortable actions
     this.container.appendChild(
-      this.runewordActions([
-        {
-          action: sortAction,
-          actionValue: "name",
-          text: "Name",
-        },
-        {
-          action: sortAction,
-          actionValue: "minLevelForRune",
-          text: "Min Level Required",
-        },
-      ])
+      this.runewordActions(
+        [
+          {
+            action: sortAction,
+            actionValue: "name",
+            text: "Name",
+          },
+          {
+            action: sortAction,
+            actionValue: "minLevelForRune",
+            text: "Min Level Required",
+          },
+        ],
+        "Sort By..."
+      )
     );
 
     // Build Socket Filter Actions
@@ -173,10 +157,11 @@ export default class RunewordsUI {
       actionValue: null,
       text: "All",
     });
-    this.container.appendChild(this.runewordActions(socketActions));
+    this.container.appendChild(
+      this.runewordActions(socketActions, "Number of Sockets")
+    );
 
     // Build Item Type Filter Actions
-    // Build Socket Filter Actions
     const itemTypes = ["Swords", "Shields"];
     const typeActions = itemTypes.map((itemType) => ({
       action: filterByItemType,
@@ -188,23 +173,7 @@ export default class RunewordsUI {
       actionValue: null,
       text: "All",
     });
-    this.container.appendChild(this.runewordActions(typeActions));
-
-    // Level Filter
-    // this.container.appendChild(
-    //   this.runewordActions([
-    //     {
-    //       action: maxLevelFilter,
-    //       actionValue: 30,
-    //       text: "30",
-    //     },
-    //     {
-    //       action: maxLevelFilter,
-    //       actionValue: 40,
-    //       text: "40",
-    //     },
-    //   ])
-    // );
+    this.container.appendChild(this.runewordActions(typeActions, "Item Type"));
 
     // Show the list
     this.container.appendChild(this.runewordList(runewords));
