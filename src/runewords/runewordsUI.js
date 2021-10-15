@@ -90,31 +90,43 @@ export default class RunewordsUI {
   // Runeword action bar
   /**
    *
-   * @param {Object} actionMap {name: functionToTrigger}
+   * @param {Array} actions [{action: function, actionValue: string, text: string}]
    */
-  runewordActions(sortAction, filters) {
-    const { maxLevelFilter, filterBySocket, filterByItemType } = filters;
+  runewordActions(actions) {
+    // const { maxLevelFilter, filterBySocket, filterByItemType } = filters;
     const actionDiv = document.createElement("div");
-    actionDiv.id = "runeword-actions";
+    actionDiv.classList.add("runeword-actions");
 
-    const buttons = [
-      // Sorting Buttons
-      this.createActionButton("Name", () => sortAction("name")),
-      this.createActionButton("Level", () => sortAction("minLevelForRune")),
-      // Level Filterint
-      this.createActionButton("Level 30", () => maxLevelFilter(30)),
-      // Socket Filtering
-      this.createActionButton("All Sockets", () => filterBySocket(null)),
-      this.createActionButton("Show 2 Sockets", () => filterBySocket(2)),
-      this.createActionButton("Show 3 Sockets", () => filterBySocket(3)),
-      this.createActionButton("Show 4 Sockets", () => filterBySocket(4)),
-      this.createActionButton("Show 5 Sockets", () => filterBySocket(5)),
-      this.createActionButton("Show 6 Sockets", () => filterBySocket(6)),
-      // Type Filtering
-      this.createActionButton("Swords", () => filterByItemType("Swords")),
-      this.createActionButton("Sheilds", () => filterByItemType("Shields")),
-      this.createActionButton("Helms", () => filterByItemType("Helms")),
-    ];
+    // const actions = [
+    //   {
+    //     action: sortAction,
+    //     actionValue: "name",
+    //     text: "Name",
+    //   },
+    // ];
+
+    const buttons = actions.map(({ action, actionValue, text }) =>
+      this.createActionButton(text, () => action(actionValue))
+    );
+
+    // const buttons = [
+    //   // Sorting Buttons
+    //   this.createActionButton("Name", () => sortAction("name")),
+    //   this.createActionButton("Level", () => sortAction("minLevelForRune")),
+    //   // Level Filterint
+    //   this.createActionButton("Level 30", () => maxLevelFilter(30)),
+    //   // Socket Filtering
+    //   this.createActionButton("All Sockets", () => filterBySocket(null)),
+    //   this.createActionButton("Show 2 Sockets", () => filterBySocket(2)),
+    //   this.createActionButton("Show 3 Sockets", () => filterBySocket(3)),
+    //   this.createActionButton("Show 4 Sockets", () => filterBySocket(4)),
+    //   this.createActionButton("Show 5 Sockets", () => filterBySocket(5)),
+    //   this.createActionButton("Show 6 Sockets", () => filterBySocket(6)),
+    //   // Type Filtering
+    //   this.createActionButton("Swords", () => filterByItemType("Swords")),
+    //   this.createActionButton("Sheilds", () => filterByItemType("Shields")),
+    //   this.createActionButton("Helms", () => filterByItemType("Helms")),
+    // ];
 
     buttons.forEach((button) => {
       actionDiv.appendChild(button);
@@ -130,8 +142,71 @@ export default class RunewordsUI {
   }
 
   render(runewords, sortAction, filters) {
+    const { maxLevelFilter, filterBySocket, filterByItemType } = filters;
+
     this.clearUI(this.container);
-    this.container.appendChild(this.runewordActions(sortAction, filters));
+    // Build sortable actions
+    this.container.appendChild(
+      this.runewordActions([
+        {
+          action: sortAction,
+          actionValue: "name",
+          text: "Name",
+        },
+        {
+          action: sortAction,
+          actionValue: "minLevelForRune",
+          text: "Min Level Required",
+        },
+      ])
+    );
+
+    // Build Socket Filter Actions
+    const socketNumbers = [2, 3, 4, 5, 6];
+    const socketActions = socketNumbers.map((numberOfSockets) => ({
+      action: filterBySocket,
+      actionValue: numberOfSockets,
+      text: numberOfSockets,
+    }));
+    socketActions.push({
+      action: filterBySocket,
+      actionValue: null,
+      text: "All",
+    });
+    this.container.appendChild(this.runewordActions(socketActions));
+
+    // Build Item Type Filter Actions
+    // Build Socket Filter Actions
+    const itemTypes = ["Swords", "Shields"];
+    const typeActions = itemTypes.map((itemType) => ({
+      action: filterByItemType,
+      actionValue: itemType,
+      text: itemType,
+    }));
+    typeActions.push({
+      action: filterByItemType,
+      actionValue: null,
+      text: "All",
+    });
+    this.container.appendChild(this.runewordActions(typeActions));
+
+    // Level Filter
+    // this.container.appendChild(
+    //   this.runewordActions([
+    //     {
+    //       action: maxLevelFilter,
+    //       actionValue: 30,
+    //       text: "30",
+    //     },
+    //     {
+    //       action: maxLevelFilter,
+    //       actionValue: 40,
+    //       text: "40",
+    //     },
+    //   ])
+    // );
+
+    // Show the list
     this.container.appendChild(this.runewordList(runewords));
   }
 }

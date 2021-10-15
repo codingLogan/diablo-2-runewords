@@ -43,7 +43,7 @@ ul {
 }
 
 /* Runeword actions div */
-#runeword-actions {
+.runeword-actions {
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-xtiny);
