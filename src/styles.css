@@ -98,6 +98,9 @@ h4 {
 
 #runewords > ul {
   margin-top: 2.33em;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #runewords > ul > li {
