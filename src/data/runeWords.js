@@ -15,14 +15,31 @@ export function getRuneWords() {
   );
 }
 
+function cleanItemType(type) {
+  switch (type) {
+    case "Maces":
+    case "Maces*":
+      return "Maces";
+    case "Staves":
+    case "Staves (Not Orbs)":
+    case "Staves* (Not Orbs)":
+      return "Staves (Not Orbs)";
+    default:
+      return type;
+  }
+}
+
 export function getItemTypes() {
   const itemTypes = {};
   getRuneWords().forEach((word) => {
     word.itemType.split("/").forEach((type) => {
-      if (typeof itemTypes[type] === "undefined") {
-        itemTypes[type] = 0;
+      const cleanType = cleanItemType(type);
+
+      if (typeof itemTypes[cleanType] === "undefined") {
+        itemTypes[cleanType] = 0;
       }
-      itemTypes[type]++;
+
+      itemTypes[cleanType]++;
     });
   });
 

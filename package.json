@@ -19,5 +19,9 @@
   },
   "jest": {
     "transforms": {}
+  },
+  "prettier": {
+    "singleQuote": false,
+    "semi": true
   }
 }

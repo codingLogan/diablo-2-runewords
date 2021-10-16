@@ -1,5 +1,5 @@
 import RunewordsController from "./runewordsController.js";
-import { getRuneWords } from "../data/runeWords.js";
+import { getItemTypes, getRuneWords } from "../data/runeWords.js";
 import { jest } from "@jest/globals";
 
 const runewordsUI = {
@@ -88,4 +88,13 @@ test("App can show only sword runewords (filter by itemType)", () => {
 
   const filteredList = runewords.filter((word) => word.filtered === false);
   expect(filteredList.length).toBe(12);
+});
+
+test("App can get a clean sorted list of all itemTypes", () => {
+  const allTypes = getItemTypes();
+  console.log("allTypes", allTypes);
+
+  // Run real test
+  expect(allTypes[0]).toBe("Axes");
+  expect(allTypes[allTypes.length - 1]).toBe("Weapons");
 });
