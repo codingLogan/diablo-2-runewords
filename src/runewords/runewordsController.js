@@ -47,7 +47,7 @@ export default class RunewordsController {
 
   setState(newState) {
     this.state = newState;
-    this.ui.render(this.runewords, this.sortWordsBy.bind(this), {
+    this.ui.render(this.state, this.sortWordsBy.bind(this), {
       maxLevelFilter: this.maxLevelFilter.bind(this),
       filterBySocket: this.filterBySocket.bind(this),
       filterByItemType: this.filterByItemType.bind(this),

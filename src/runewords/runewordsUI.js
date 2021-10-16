@@ -82,10 +82,16 @@ export default class RunewordsUI {
     return list;
   }
 
-  createActionButton(text, onClick) {
+  createActionButton(text, onClick, active) {
     const actionButton = document.createElement("button");
     actionButton.innerText = text;
     actionButton.onclick = onClick;
+
+    // Make active if the filter is active
+    if (active) {
+      actionButton.classList.add("active");
+    }
+
     return actionButton;
   }
 
@@ -107,8 +113,8 @@ export default class RunewordsUI {
     actionDiv.classList.add("runeword-actions");
     actionSection.appendChild(actionDiv);
 
-    const buttons = actions.map(({ action, actionValue, text }) =>
-      this.createActionButton(text, () => action(actionValue))
+    const buttons = actions.map(({ action, actionValue, active, text }) =>
+      this.createActionButton(text, () => action(actionValue), active)
     );
 
     buttons.forEach((button) => {
@@ -124,8 +130,12 @@ export default class RunewordsUI {
     }
   }
 
-  render(runewords, sortAction, filters) {
-    const { maxLevelFilter, filterBySocket, filterByItemType } = filters;
+  render(data, sortAction, filterActions) {
+    const runewords = data.runewords;
+    const { itemType: chosenItemType, sockets: chosenNumberOfSockets } =
+      data.filters;
+
+    const { maxLevelFilter, filterBySocket, filterByItemType } = filterActions;
 
     this.clearUI(this.container);
     // Build sortable actions
@@ -152,11 +162,13 @@ export default class RunewordsUI {
     const socketActions = socketNumbers.map((numberOfSockets) => ({
       action: filterBySocket,
       actionValue: numberOfSockets,
+      active: chosenNumberOfSockets === numberOfSockets,
       text: numberOfSockets,
     }));
     socketActions.push({
       action: filterBySocket,
       actionValue: null,
+      active: chosenNumberOfSockets === null,
       text: "All",
     });
     this.container.appendChild(
@@ -169,11 +181,13 @@ export default class RunewordsUI {
     const typeActions = itemTypes.map((itemType) => ({
       action: filterByItemType,
       actionValue: itemType,
+      active: chosenItemType === itemType,
       text: itemType,
     }));
     typeActions.push({
       action: filterByItemType,
       actionValue: null,
+      active: chosenItemType === null,
       text: "All",
     });
     this.container.appendChild(this.runewordActions(typeActions, "Item Type"));

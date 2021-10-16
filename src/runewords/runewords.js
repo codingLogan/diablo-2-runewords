@@ -9,7 +9,5 @@ const runewordsController = new RunewordsController(
   getRuneWords()
 );
 
-// Example actions the controller can use for the data
-// runewordsController.sortWordsBy("name");
-// console.log("\n\nBREAK\n\n");
-// runewordsController.sortWordsBy("minLevelForRune");
+// Sort by minLevel by default
+runewordsController.sortWordsBy("minLevelForRune");

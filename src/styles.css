@@ -36,6 +36,19 @@ main {
   flex-grow: 1;
 }
 
+button {
+  all: unset;
+  background-color: var(--background-secondary);
+  padding: var(--spacing-tiny);
+  border-radius: 4px;
+  color: var(--foreground-secondary);
+}
+
+button.active {
+  background-color: var(--link-text-active-secondary);
+  color: #908858;
+}
+
 ul {
   list-style: none;
   margin: 0;
