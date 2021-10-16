@@ -1,3 +1,4 @@
+import { cleanItemType } from "../data/runeWords.js";
 import RunewordsUI from "./runewordsUI.js";
 
 /**
@@ -88,6 +89,7 @@ export default class RunewordsController {
         // If not, filter it
         const hasFilteredType = word.itemType
           .split("/")
+          .map((wordItemType) => cleanItemType(wordItemType))
           .includes(filters.itemType);
         if (!hasFilteredType) {
           return true;

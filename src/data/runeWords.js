@@ -15,7 +15,7 @@ export function getRuneWords() {
   );
 }
 
-function cleanItemType(type) {
+export function cleanItemType(type) {
   switch (type) {
     case "Maces":
     case "Maces*":

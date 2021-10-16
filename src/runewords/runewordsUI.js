@@ -1,3 +1,5 @@
+import { getItemTypes } from "../data/runeWords.js";
+
 export default class RunewordsUI {
   constructor(attachToElement) {
     this.container = attachToElement;
@@ -162,7 +164,8 @@ export default class RunewordsUI {
     );
 
     // Build Item Type Filter Actions
-    const itemTypes = ["Swords", "Shields"];
+    // const itemTypes = ["Swords", "Shields", "Maces", "Staves"];
+    const itemTypes = getItemTypes();
     const typeActions = itemTypes.map((itemType) => ({
       action: filterByItemType,
       actionValue: itemType,
