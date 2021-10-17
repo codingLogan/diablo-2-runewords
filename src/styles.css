@@ -96,7 +96,8 @@ h4 {
   justify-content: space-between;
 }
 
-#runewords > ul {
+#runewords > ul,
+#runes > ul {
   margin-top: 2.33em;
   max-width: 650px;
   margin-left: auto;

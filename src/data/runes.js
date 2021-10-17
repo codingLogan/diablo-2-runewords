@@ -34,7 +34,7 @@ const RUNE_RECIPIES = {
   Zod: "2 Cham + Flawless Emerald",
 };
 
-export default [
+const runes = [
   {
     image:
       "http://classic.battle.net/images/battle/diablo2exp/images/runes/runeEl.gif",
@@ -300,3 +300,12 @@ export default [
     level: 69,
   },
 ];
+
+export function getRunes() {
+  return runes.map((rune) => ({
+    ...rune,
+    recipe: RUNE_RECIPIES[rune.name],
+  }));
+}
+
+export default runes;

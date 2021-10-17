@@ -1,6 +1,6 @@
 {
   "name": "d2-rune-tools",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A small site to hold and view runes and runeword information",
   "main": "server.js",
   "scripts": {
