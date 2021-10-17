@@ -128,6 +128,14 @@ export default class RunewordsUI {
     }
   }
 
+  showAllEffects(show) {
+    const allEffects = document.querySelectorAll(".runeword-effects");
+
+    allEffects.forEach((effect) => {
+      effect.hidden = !show;
+    });
+  }
+
   render(data, sortAction, filterActions) {
     const { runewords, itemTypes, filters } = data;
     const { itemType: chosenItemType, sockets: chosenNumberOfSockets } =
@@ -186,6 +194,24 @@ export default class RunewordsUI {
       text: "All",
     });
     this.container.appendChild(this.runewordActions(typeActions, "Item Type"));
+
+    // Button to show all and hide all
+    this.container.appendChild(
+      this.runewordActions([
+        {
+          action: this.showAllEffects,
+          actionValue: true,
+          active: false,
+          text: "Expand All",
+        },
+        {
+          action: this.showAllEffects,
+          actionValue: false,
+          active: false,
+          text: "Collapse All",
+        },
+      ])
+    );
 
     // Show the list
     this.container.appendChild(this.runewordList(runewords));
