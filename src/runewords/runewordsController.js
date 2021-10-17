@@ -17,7 +17,7 @@ export default class RunewordsController {
   constructor(runewordsUI, data) {
     const { runewords, itemTypes } = data;
     this.ui = runewordsUI;
-    this.setState({
+    this.state = {
       runewords: this.addFilteringProps(runewords),
       itemTypes,
       filters: {
@@ -25,7 +25,9 @@ export default class RunewordsController {
         sockets: null, // Number
         itemType: null, // String
       },
-    });
+    };
+
+    this.renderUI();
   }
 
   get runewords() {
@@ -51,17 +53,21 @@ export default class RunewordsController {
     }));
   }
 
+  renderUI() {
+    this.ui.render(this.state, this.sortWordsBy.bind(this), {
+      maxLevelFilter: this.maxLevelFilter.bind(this),
+      filterBySocket: this.filterBySocket.bind(this),
+      filterByItemType: this.filterByItemType.bind(this),
+    });
+  }
+
   setState(newState) {
     this.state = {
       ...this.state,
       ...newState,
     };
 
-    this.ui.render(this.state, this.sortWordsBy.bind(this), {
-      maxLevelFilter: this.maxLevelFilter.bind(this),
-      filterBySocket: this.filterBySocket.bind(this),
-      filterByItemType: this.filterByItemType.bind(this),
-    });
+    this.renderUI();
   }
 
   sortWordsBy(propertyName) {
@@ -100,6 +106,7 @@ export default class RunewordsController {
           .split("/")
           .map((wordItemType) => cleanItemType(wordItemType))
           .includes(filters.itemType);
+
         if (!hasFilteredType) {
           return true;
         }
@@ -118,46 +125,37 @@ export default class RunewordsController {
   }
 
   maxLevelFilter(maxCharacterLevel) {
-    // Filters is an object
-    // Set filters: maxLevel to the passed in value
-    const newFilters = {
+    this.setFilters({
       ...this.filters,
       maxLevel: maxCharacterLevel,
-    };
-
-    const newRunewords = this.applyFilters(this.runewords, newFilters);
-
-    this.setState({
-      runewords: newRunewords,
-      fiters: newFilters,
     });
   }
 
   filterBySocket(numberOfSockets) {
-    const newFilters = {
+    this.setFilters({
       ...this.filters,
       sockets: numberOfSockets,
-    };
-
-    const newRunewords = this.applyFilters(this.runewords, newFilters);
-
-    this.setState({
-      runewords: newRunewords,
-      filters: newFilters,
     });
   }
 
   filterByItemType(itemType) {
-    const newFilters = {
+    this.setFilters({
       ...this.filters,
       itemType: itemType,
-    };
+    });
+  }
 
-    const newRunewords = this.applyFilters(this.runewords, newFilters);
+  // When we set the filter we want to apply them too
+  // 1. Create the Filter values
+  // 2. Apply filter to get new runeword data
+  // 3. Set State (filters and runewords)
+  // 4. Trigger UI
+  setFilters(filters) {
+    const newRunewords = this.applyFilters(this.runewords, filters);
 
     this.setState({
       runewords: newRunewords,
-      filters: newFilters,
+      filters,
     });
   }
 }
