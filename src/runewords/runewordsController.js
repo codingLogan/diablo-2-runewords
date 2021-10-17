@@ -14,10 +14,12 @@ export default class RunewordsController {
    * @param {RunewordsUI} runewordsUI
    * @param {Array} runewords
    */
-  constructor(runewordsUI, runewords) {
+  constructor(runewordsUI, data) {
+    const { runewords, itemTypes } = data;
     this.ui = runewordsUI;
     this.setState({
       runewords: this.addFilteringProps(runewords),
+      itemTypes,
       filters: {
         maxLevel: null, // Number
         sockets: null, // Number
@@ -34,6 +36,10 @@ export default class RunewordsController {
     return this.state.filters || {};
   }
 
+  get itemTypes() {
+    return this.state.itemTypes || [];
+  }
+
   /**
    *
    * @param {Array} runewords
@@ -46,7 +52,11 @@ export default class RunewordsController {
   }
 
   setState(newState) {
-    this.state = newState;
+    this.state = {
+      ...this.state,
+      ...newState,
+    };
+
     this.ui.render(this.state, this.sortWordsBy.bind(this), {
       maxLevelFilter: this.maxLevelFilter.bind(this),
       filterBySocket: this.filterBySocket.bind(this),
@@ -66,7 +76,6 @@ export default class RunewordsController {
 
     this.setState({
       runewords: [...currentRunewords],
-      filters: this.filters,
     });
   }
 

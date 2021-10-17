@@ -1,5 +1,3 @@
-import { getItemTypes } from "../data/runeWords.js";
-
 export default class RunewordsUI {
   constructor(attachToElement) {
     this.container = attachToElement;
@@ -131,10 +129,9 @@ export default class RunewordsUI {
   }
 
   render(data, sortAction, filterActions) {
-    const runewords = data.runewords;
+    const { runewords, itemTypes, filters } = data;
     const { itemType: chosenItemType, sockets: chosenNumberOfSockets } =
-      data.filters;
-
+      filters;
     const { maxLevelFilter, filterBySocket, filterByItemType } = filterActions;
 
     this.clearUI(this.container);
@@ -176,8 +173,6 @@ export default class RunewordsUI {
     );
 
     // Build Item Type Filter Actions
-    // const itemTypes = ["Swords", "Shields", "Maces", "Staves"];
-    const itemTypes = getItemTypes();
     const typeActions = itemTypes.map((itemType) => ({
       action: filterByItemType,
       actionValue: itemType,

@@ -18,7 +18,10 @@ function runewordSortTest(runewords, sortProperty) {
 }
 
 beforeEach(() => {
-  runewordsController = new RunewordsController(runewordsUI, getRuneWords());
+  runewordsController = new RunewordsController(runewordsUI, {
+    runewords: getRuneWords(),
+    itemTypes: getItemTypes(),
+  });
 });
 
 test("Runewords get sorted by minLevelForRune", () => {
