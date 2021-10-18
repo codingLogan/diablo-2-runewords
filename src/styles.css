@@ -60,6 +60,18 @@ h4 {
   margin-bottom: 0;
 }
 
+header a {
+  color: var(--link-text-active-secondary);
+}
+
+a {
+  color: var(--link-text-active-primary);
+}
+
+#references {
+  text-align: center;
+}
+
 /* Runeword actions div */
 .runeword-actions {
   display: flex;
@@ -98,7 +110,7 @@ h4 {
 
 #runewords > ul,
 #runes > ul {
-  margin-top: 2.33em;
+  margin-top: 1.33em;
   max-width: 650px;
   margin-left: auto;
   margin-right: auto;
@@ -106,6 +118,10 @@ h4 {
 
 #runewords > ul > li {
   margin-bottom: var(--spacing-xtiny);
+}
+
+#runewords > div:nth-child(4) > div {
+  margin-top: 2em;
 }
 
 .runeword-effects {
