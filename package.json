@@ -2,21 +2,19 @@
   "name": "d2-rune-tools",
   "version": "1.2.0",
   "description": "A small site to hold and view runes and runeword information",
-  "main": "server.js",
+  "source": "src/index.html",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "dev": "nodemon server.js",
-    "start": "node server.js"
+    "dev": "parcel --dist-dir docs",
+    "build": "parcel build --dist-dir docs --public-url https://codinglogan.github.io/diablo-2-runewords/"
   },
   "author": "codingLogan",
   "license": "ISC",
   "type": "module",
-  "dependencies": {
-    "express": "^4.17.1"
-  },
   "devDependencies": {
     "jest": "^27.2.5",
-    "nodemon": "^2.0.13"
+    "nodemon": "^2.0.13",
+    "parcel": "^2.7.0"
   },
   "jest": {
     "transforms": {}
