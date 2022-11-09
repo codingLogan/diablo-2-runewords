@@ -5,8 +5,8 @@
   "source": "src/index.html",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "dev": "parcel",
-    "build": "parcel build --dist-dir docs"
+    "dev": "parcel --dist-dir docs",
+    "build": "parcel build --dist-dir docs --public-url https://codinglogan.github.io/diablo-2-runewords/"
   },
   "author": "codingLogan",
   "license": "ISC",
