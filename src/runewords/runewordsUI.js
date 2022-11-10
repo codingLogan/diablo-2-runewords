@@ -93,13 +93,30 @@ export default class RunewordsUI {
     return actionButton;
   }
 
+  createActionToggle(text, onClick, active) {
+    const toggleHtml = `
+    <div class="switch-container">
+      <label class="switch">
+        <input type="checkbox" ${active ? "checked" : ""} />
+        <span class="slider"></span>
+      </label>
+      <span class="switch-text">${text}</span>
+    </div>`;
+    const template = document.createElement("template");
+    template.innerHTML = toggleHtml;
+    const actionToggle = template.content.firstElementChild;
+    actionToggle.querySelector("input").onclick = onClick;
+
+    return actionToggle;
+  }
+
   // Runeword action bar
   /**
    *
    * @param {Array} actions [{action: function, actionValue: string, text: string}]
    * @param {string} headerText creates a heaver for the actions
    */
-  runewordActions(actions, headerText = "") {
+  runewordActions(actions, headerText = "", useToggles = false) {
     // Build a header for the filters
     const actionHeader = document.createElement("h4");
     actionHeader.innerText = headerText;
@@ -111,9 +128,18 @@ export default class RunewordsUI {
     actionDiv.classList.add("runeword-actions");
     actionSection.appendChild(actionDiv);
 
-    const buttons = actions.map(({ action, actionValue, active, text }) =>
-      this.createActionButton(text, () => action(actionValue), active)
-    );
+    let buttons = [];
+    if (useToggles) {
+      // Toggle switches (checkboxes)
+      buttons = actions.map(({ action, actionValue, active, text }) =>
+        this.createActionToggle(text, () => action(actionValue), active)
+      );
+    } else {
+      // Buttons
+      buttons = actions.map(({ action, actionValue, active, text }) =>
+        this.createActionButton(text, () => action(actionValue), active)
+      );
+    }
 
     buttons.forEach((button) => {
       actionDiv.appendChild(button);
@@ -176,8 +202,10 @@ export default class RunewordsUI {
       active: chosenNumberOfSockets === null,
       text: "All",
     });
+
+    const useToggles = true;
     this.container.appendChild(
-      this.runewordActions(socketActions, "Number of Sockets")
+      this.runewordActions(socketActions, "Number of Sockets", useToggles)
     );
 
     // Build Item Type Filter Actions
@@ -193,7 +221,9 @@ export default class RunewordsUI {
       active: chosenItemType === null,
       text: "All",
     });
-    this.container.appendChild(this.runewordActions(typeActions, "Item Type"));
+    this.container.appendChild(
+      this.runewordActions(typeActions, "Item Types", false)
+    );
 
     // Button to show all and hide all
     this.container.appendChild(

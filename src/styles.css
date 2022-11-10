@@ -15,6 +15,8 @@
   --background-accent: red;
   --foreground-accent: white;
 
+  --toggle-selected: #908858;
+
   /* Spacing variables */
   --spacing-medium: 12px;
   --spacing-tiny: 8px;
@@ -172,4 +174,77 @@ header nav ul li a.nav-active {
 section {
   padding-left: var(--spacing-medium);
   padding-right: var(--spacing-medium);
+}
+
+/* ============= */
+/* Slider styles */
+/* ============= */
+
+/* Outer containing label */
+.switch {
+  position: relative;
+  display: flex;
+  width: 60px;
+  height: 24px;
+  align-items: center;
+}
+
+/* Hide the original checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Set background color */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  background-color: grey;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+/* Create slider button */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+/* Set color for background when on */
+input:checked + .slider {
+  background-color: var(--toggle-selected);
+}
+
+/* Highlight the slider when in focus */
+input:focus + .slider {
+  box-shadow: 0 0 8px #2196f3;
+}
+
+/* Move slider when checked */
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.switch-text {
+  /* position: absolute; */
+  left: 68px;
+  white-space: nowrap;
+}
+
+.switch-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
