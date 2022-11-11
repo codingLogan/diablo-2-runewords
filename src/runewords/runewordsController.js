@@ -1,5 +1,5 @@
 import RunewordsUI from "./runewordsUI.js";
-import { filterWords } from "@diablo-tools/d2-runewords";
+import { filterWords, sortWords } from "@diablo-tools/d2-runewords";
 
 /**
  * This controller handles the behavior and state for the UI
@@ -26,6 +26,7 @@ export default class RunewordsController {
         sockets: [], // Only 2 or 3 sockets
         games: [], // All games
       },
+      sortBy: "name", // 'name' | 'level'
     };
 
     this.renderUI();
@@ -62,16 +63,10 @@ export default class RunewordsController {
 
   sortWordsBy(propertyName) {
     const currentRunewords = this.runewords.slice();
-    currentRunewords.sort((a, b) => {
-      if (a[propertyName] === b[propertyName]) {
-        return 0;
-      }
-
-      return a[propertyName] < b[propertyName] ? -1 : 1;
-    });
 
     this.setState({
-      runewords: [...currentRunewords],
+      runewords: sortWords(currentRunewords, propertyName),
+      sortBy: propertyName,
     });
   }
 
@@ -124,7 +119,7 @@ export default class RunewordsController {
     const newRunewords = this.applyFilters(this.allRunewords, filters);
 
     this.setState({
-      runewords: newRunewords,
+      runewords: sortWords(newRunewords, this.state.sortBy),
       filters,
     });
   }
