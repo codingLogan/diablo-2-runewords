@@ -8,12 +8,16 @@ import calculateMinLevel from "../utilities/calculate-level.js";
 
 // Combine all runewords into onelist
 export function getRuneWords() {
-  return [...wordsOriginal, ...words110, ...words110Ladder, ...words111, ...d2r24].map(
-    (runeword) => ({
-      ...runeword,
-      minLevelForRune: calculateMinLevel(runeword.runeOrder),
-    })
-  );
+  return [
+    ...wordsOriginal,
+    ...words110,
+    ...words110Ladder,
+    ...words111,
+    ...d2r24,
+  ].map((runeword) => ({
+    ...runeword,
+    level: calculateMinLevel(runeword.runeOrder),
+  }));
 }
 
 export function cleanItemType(type) {

@@ -88,10 +88,7 @@ export default class RunewordsController {
   // Logic for applying filters (determine new runewords state)
   applyFilters(runewords, filters) {
     const wordCheck = (word) => {
-      if (
-        filters.maxLevel !== null &&
-        word.minLevelForRune > filters.maxLevel
-      ) {
+      if (filters.maxLevel !== null && word.level > filters.maxLevel) {
         return true;
       }
 
@@ -103,7 +100,6 @@ export default class RunewordsController {
         // Question: does the word have the type we want?
         // If not, filter it
         const hasFilteredType = word.itemType
-          .split("/")
           .map((wordItemType) => cleanItemType(wordItemType))
           .includes(filters.itemType);
 

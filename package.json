@@ -22,5 +22,8 @@
   "prettier": {
     "singleQuote": false,
     "semi": true
+  },
+  "dependencies": {
+    "@diablo-tools/d2-runewords": "^1.0.0"
   }
 }
