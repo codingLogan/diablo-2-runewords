@@ -1,13 +1,16 @@
 import RunewordsController from "./runewordsController.js";
-import { getItemTypes, getRuneWords } from "../data/runeWords.js";
+import getItemTypes from "../utilities/getItemTypes.js";
 import RunewordsUI from "./runewordsUI.js";
+import { getAllWords } from "@diablo-tools/d2-runewords";
 
 const runewordsContainer = document.getElementById("runewords");
 const runewordsUI = new RunewordsUI(runewordsContainer);
+
+const words = getAllWords();
 const runewordsController = new RunewordsController(runewordsUI, {
-  runewords: getRuneWords(),
-  itemTypes: getItemTypes(),
+  runewords: words,
+  itemTypes: getItemTypes(words),
 });
 
 // Sort by minLevel by default
-runewordsController.sortWordsBy("minLevelForRune");
+runewordsController.sortWordsBy("level");

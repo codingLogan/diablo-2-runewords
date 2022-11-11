@@ -4,14 +4,7 @@ export default class RunewordsUI {
   }
 
   // Helper to create each runeword Item
-  runewordItem({
-    name,
-    minLevelForRune,
-    sockets,
-    itemType,
-    runeOrder,
-    effects,
-  }) {
+  runewordItem({ name, level, sockets, itemType, runeOrder, effects }) {
     const item = document.createElement("li");
 
     const itemHeader = document.createElement("div");
@@ -35,7 +28,7 @@ export default class RunewordsUI {
     titleDiv.appendChild(titleLeft);
 
     const titleRight = document.createElement("span");
-    titleRight.innerText = `Level ${minLevelForRune}`;
+    titleRight.innerText = `Level ${level}`;
     titleDiv.appendChild(titleRight);
 
     // Subtitle Row
@@ -180,7 +173,7 @@ export default class RunewordsUI {
           },
           {
             action: sortAction,
-            actionValue: "minLevelForRune",
+            actionValue: "level",
             text: "Min Level Required",
           },
         ],

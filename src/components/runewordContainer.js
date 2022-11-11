@@ -4,7 +4,7 @@
  */
 export default function runewordContainer(
   runewords,
-  dataColumns = { name: "Name", minLevelForRune: "Level", sockets: "Sockets" },
+  dataColumns = { name: "Name", level: "Level", sockets: "Sockets" },
   displayOptions = {}
 ) {
   const wordTable = document.createElement("table");
@@ -84,7 +84,7 @@ export function tableActions() {
 
   const buttons = [
     createActionButton("Name", () => sortTable("name")),
-    createActionButton("Level", () => sortTable("minLevelForRune")),
+    createActionButton("Level", () => sortTable("level")),
   ];
 
   buttons.forEach((button) => {
