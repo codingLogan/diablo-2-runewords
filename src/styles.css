@@ -15,7 +15,7 @@
   --background-accent: red;
   --foreground-accent: white;
 
-  --toggle-selected: #908858;
+  --toggle-selected: green;
 
   /* Spacing variables */
   --spacing-medium: 12px;
@@ -36,6 +36,8 @@ body {
 
 main {
   flex-grow: 1;
+  max-width: 650px;
+  margin: auto;
 }
 
 button {
@@ -58,7 +60,6 @@ ul {
 }
 
 h4 {
-  text-align: center;
   margin-bottom: 0;
 }
 
@@ -76,11 +77,13 @@ a {
 
 /* Runeword actions div */
 .runeword-actions {
+  margin-top: var(--spacing-medium);
+  margin-right: auto;
+  margin-bottom: var(--spacing-medium);
+  margin-left: auto;
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-xtiny);
-  margin: var(--spacing-medium);
-  justify-content: center;
 }
 
 /* Styles for header blocks with subtitles */
@@ -114,6 +117,7 @@ a {
 #runes > ul {
   margin-top: 1.33em;
   max-width: 650px;
+  min-width: 350px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -196,6 +200,17 @@ section {
   height: 0;
 }
 
+.switch::before {
+  content: "on";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 12px;
+  height: 12px;
+  color: white;
+  z-index: 1;
+}
+
 /* Set background color */
 .slider {
   position: absolute;
@@ -238,13 +253,26 @@ input:checked + .slider:before {
 }
 
 .switch-text {
-  /* position: absolute; */
-  left: 68px;
   white-space: nowrap;
+  margin-left: 8px;
+  margin-right: 8px;
+  width: 96px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 12px;
 }
 
 .switch-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
+}
+
+.runeword-toggles {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-xtiny);
+  width: fit-content;
+  margin: auto;
 }

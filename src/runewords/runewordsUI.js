@@ -222,7 +222,7 @@ export default class RunewordsUI {
       text: "All",
     });
     this.container.appendChild(
-      this.runewordActions(typeActions, "Item Types", false)
+      this.runewordActions(typeActions, "Item Types", useToggles)
     );
 
     // Button to show all and hide all
