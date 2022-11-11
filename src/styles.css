@@ -37,7 +37,9 @@ body {
 main {
   flex-grow: 1;
   max-width: 650px;
-  margin: auto;
+  align-self: center;
+  padding-left: var(--spacing-medium);
+  padding-right: var(--spacing-medium);
 }
 
 button {
@@ -173,11 +175,6 @@ header nav ul li a {
 
 header nav ul li a.nav-active {
   color: var(--link-text-active-secondary);
-}
-
-section {
-  padding-left: var(--spacing-medium);
-  padding-right: var(--spacing-medium);
 }
 
 /* ============= */
