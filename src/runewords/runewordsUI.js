@@ -65,9 +65,7 @@ export default class RunewordsUI {
     const list = document.createElement("ul");
 
     runewords.forEach((word) => {
-      if (word.filtered === false) {
-        list.appendChild(this.runewordItem(word));
-      }
+      list.appendChild(this.runewordItem(word));
     });
 
     return list;
@@ -159,7 +157,7 @@ export default class RunewordsUI {
     const { runewords, itemTypes, filters } = data;
     const { itemType: chosenItemType, sockets: chosenNumberOfSockets } =
       filters;
-    const { maxLevelFilter, filterBySocket, filterByItemType } = filterActions;
+    const { filterBySocket, filterByItemType } = filterActions;
 
     this.clearUI(this.container);
     // Build sortable actions
@@ -183,18 +181,12 @@ export default class RunewordsUI {
 
     // Build Socket Filter Actions
     const socketNumbers = [2, 3, 4, 5, 6];
-    const socketActions = socketNumbers.map((numberOfSockets) => ({
+    const socketActions = socketNumbers.map((numberOption) => ({
       action: filterBySocket,
-      actionValue: numberOfSockets,
-      active: chosenNumberOfSockets === numberOfSockets,
-      text: numberOfSockets,
+      actionValue: numberOption,
+      active: chosenNumberOfSockets.includes(numberOption),
+      text: numberOption,
     }));
-    socketActions.push({
-      action: filterBySocket,
-      actionValue: null,
-      active: chosenNumberOfSockets === null,
-      text: "All",
-    });
 
     const useToggles = true;
     this.container.appendChild(
@@ -202,18 +194,13 @@ export default class RunewordsUI {
     );
 
     // Build Item Type Filter Actions
-    const typeActions = itemTypes.map((itemType) => ({
+    const typeActions = itemTypes.map((itemTypeOption) => ({
       action: filterByItemType,
-      actionValue: itemType,
-      active: chosenItemType === itemType,
-      text: itemType,
+      actionValue: itemTypeOption,
+      active: chosenItemType.includes(itemTypeOption),
+      text: itemTypeOption,
     }));
-    typeActions.push({
-      action: filterByItemType,
-      actionValue: null,
-      active: chosenItemType === null,
-      text: "All",
-    });
+
     this.container.appendChild(
       this.runewordActions(typeActions, "Item Types", useToggles)
     );

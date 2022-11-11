@@ -1,4 +1,5 @@
 import RunewordsUI from "./runewordsUI.js";
+import { filterWords } from "@diablo-tools/d2-runewords";
 
 /**
  * This controller handles the behavior and state for the UI
@@ -15,14 +16,15 @@ export default class RunewordsController {
    */
   constructor(runewordsUI, data) {
     const { runewords, itemTypes } = data;
+    this.allRunewords = [...runewords];
     this.ui = runewordsUI;
     this.state = {
-      runewords: this.addFilteringProps(runewords),
+      runewords: [...runewords], // Copy the raw runeword data to start
       itemTypes,
       filters: {
-        maxLevel: null, // Number
-        sockets: null, // Number
-        itemType: null, // String
+        itemType: [], // Only Helms
+        sockets: [], // Only 2 or 3 sockets
+        games: [], // All games
       },
     };
 
@@ -39,17 +41,6 @@ export default class RunewordsController {
 
   get itemTypes() {
     return this.state.itemTypes || [];
-  }
-
-  /**
-   *
-   * @param {Array} runewords
-   */
-  addFilteringProps(runewords) {
-    return runewords.map((word) => ({
-      ...word,
-      filtered: false,
-    }));
   }
 
   renderUI() {
@@ -86,35 +77,7 @@ export default class RunewordsController {
 
   // Logic for applying filters (determine new runewords state)
   applyFilters(runewords, filters) {
-    const wordCheck = (word) => {
-      if (filters.maxLevel !== null && word.level > filters.maxLevel) {
-        return true;
-      }
-
-      if (filters.sockets !== null && word.sockets !== filters.sockets) {
-        return true;
-      }
-
-      if (filters.itemType !== null) {
-        // Question: does the word have the type we want?
-        // If not, filter it
-        const hasFilteredType = word.itemType.includes(filters.itemType);
-
-        if (!hasFilteredType) {
-          return true;
-        }
-      }
-
-      return false;
-    };
-
-    // Loop through each runeword and determine if it should be filtered or not
-    const newRunewords = runewords.map((word) => ({
-      ...word,
-      filtered: wordCheck(word),
-    }));
-
-    return newRunewords;
+    return filterWords(runewords, filters);
   }
 
   maxLevelFilter(maxCharacterLevel) {
@@ -125,16 +88,30 @@ export default class RunewordsController {
   }
 
   filterBySocket(numberOfSockets) {
+    // Toggle the selected value in the filter
+    const index = this.filters.sockets.indexOf(numberOfSockets);
+    if (index !== -1) {
+      this.filters.sockets.splice(index, 1);
+    } else {
+      this.filters.sockets.push(numberOfSockets);
+    }
+
     this.setFilters({
       ...this.filters,
-      sockets: numberOfSockets,
     });
   }
 
   filterByItemType(itemType) {
+    // Toggle the selected value in the filter
+    const index = this.filters.itemType.indexOf(itemType);
+    if (index !== -1) {
+      this.filters.itemType.splice(index, 1);
+    } else {
+      this.filters.itemType.push(itemType);
+    }
+
     this.setFilters({
       ...this.filters,
-      itemType: itemType,
     });
   }
 
@@ -144,7 +121,7 @@ export default class RunewordsController {
   // 3. Set State (filters and runewords)
   // 4. Trigger UI
   setFilters(filters) {
-    const newRunewords = this.applyFilters(this.runewords, filters);
+    const newRunewords = this.applyFilters(this.allRunewords, filters);
 
     this.setState({
       runewords: newRunewords,
