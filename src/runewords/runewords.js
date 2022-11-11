@@ -8,7 +8,7 @@ const runewordsUI = new RunewordsUI(runewordsContainer);
 
 const words = getAllWords();
 const runewordsController = new RunewordsController(runewordsUI, {
-  runewords: getAllWords(),
+  runewords: words,
   itemTypes: getItemTypes(words), // TODO: get types from words
 });
 

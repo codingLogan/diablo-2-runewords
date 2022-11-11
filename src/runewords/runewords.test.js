@@ -1,5 +1,5 @@
 import RunewordsController from "./runewordsController.js";
-import { getItemTypes } from "../data/runeWords.js";
+import getItemTypes from "../utilities/getItemTypes.js";
 import { jest } from "@jest/globals";
 import { getAllWords } from "@diablo-tools/d2-runewords";
 
@@ -19,9 +19,10 @@ function runewordSortTest(runewords, sortProperty) {
 }
 
 beforeEach(() => {
+  const words = getAllWords();
   runewordsController = new RunewordsController(runewordsUI, {
-    runewords: getAllWords(),
-    itemTypes: getItemTypes(),
+    runewords: words,
+    itemTypes: getItemTypes(words),
   });
 });
 
@@ -95,7 +96,7 @@ test("App can show only sword runewords (filter by itemType)", () => {
 });
 
 test("App can get a clean sorted list of all itemTypes", () => {
-  const allTypes = getItemTypes();
+  const allTypes = getItemTypes(runewordsController.runewords);
   console.log("allTypes", allTypes);
 
   // Run real test
