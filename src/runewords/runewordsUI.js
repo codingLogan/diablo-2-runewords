@@ -154,7 +154,7 @@ export default class RunewordsUI {
   }
 
   render(data, sortAction, filterActions) {
-    const { runewords, itemTypes, filters } = data;
+    const { runewords, itemTypes, filters, sortBy } = data;
     const { itemType: chosenItemType, sockets: chosenNumberOfSockets } =
       filters;
     const { filterBySocket, filterByItemType } = filterActions;
@@ -167,11 +167,13 @@ export default class RunewordsUI {
           {
             action: sortAction,
             actionValue: "name",
+            active: sortBy === "name",
             text: "Name",
           },
           {
             action: sortAction,
             actionValue: "level",
+            active: sortBy === "level",
             text: "Min Level Required",
           },
         ],
