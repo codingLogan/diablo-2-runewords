@@ -9,7 +9,7 @@ const runewordsUI = new RunewordsUI(runewordsContainer);
 const words = getAllWords();
 const runewordsController = new RunewordsController(runewordsUI, {
   runewords: words,
-  itemTypes: getItemTypes(words), // TODO: get types from words
+  itemTypes: getItemTypes(words),
 });
 
 // Sort by minLevel by default
