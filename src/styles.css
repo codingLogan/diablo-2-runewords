@@ -1,23 +1,30 @@
 :root {
   --background-primary: black;
-  --foreground-primary: white;
-  --link-text-primary: white;
-  --link-text-active-primary: red;
-
-  --card-background: #20100a;
-  --card-foreground: var(--foreground-primary);
-
   --background-secondary: darkgray;
-  --foreground-secondary: black;
-  --link-text-secondary: black;
-  --link-text-active-secondary: #820000;
-
   --background-accent: red;
+
+  --background-red-primary: #20100a;
+
+  --foreground-primary: grey;
+  --foreground-secondary: black;
   --foreground-accent: white;
 
-  --toggle-selected: green;
+  --text-primary: white;
+  --text-secondary: #4466ff;
+  --text-accent: #a19969;
+
+  --link-text-primary: white;
+  --link-text-secondary: black;
+  --link-text-active-primary: red;
+  --link-text-active-secondary: #820000;
+
+  --card-background: #20100a;
+  --card-foreground: white;
+
+  --toggle-selected: #4466ff;
 
   /* Spacing variables */
+  --spacing-large: 24px;
   --spacing-medium: 12px;
   --spacing-tiny: 8px;
   --spacing-xtiny: 4px;
@@ -30,7 +37,7 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--background-primary);
-  color: var(--foreground-primary);
+  color: var(--text-primary);
   font-family: Arial, Helvetica, Sans-Serif;
 }
 
@@ -52,7 +59,7 @@ button {
 
 button.active {
   background-color: var(--link-text-active-secondary);
-  color: #908858;
+  color: var(--text-accent);
 }
 
 ul {
@@ -65,8 +72,16 @@ h4 {
   margin-bottom: 0;
 }
 
+header {
+  padding-bottom: 16px;
+}
+
 header a {
   color: var(--link-text-active-secondary);
+}
+
+header h1 {
+  margin-bottom: 0px;
 }
 
 a {
@@ -99,7 +114,7 @@ a {
 }
 
 .header-block h3 {
-  color: #908858;
+  color: var(--text-accent);
 }
 
 .header-block {
@@ -137,7 +152,7 @@ a {
   border: 1px solid var(--background-secondary);
   border-top: none;
   padding: var(--spacing-xtiny);
-  color: #4850a8;
+  color: var(--text-secondary);
 }
 
 /* Navigation styles */
@@ -148,8 +163,8 @@ header {
 footer,
 header {
   text-align: center;
-  background-color: var(--background-secondary);
-  color: var(--foreground-secondary);
+  background-color: var(--background-red-primary);
+  color: var(--text-accent);
 }
 
 footer {
@@ -184,6 +199,7 @@ header nav ul li a.nav-active {
 /* Outer containing label */
 .switch {
   position: relative;
+  cursor: pointer;
   display: flex;
   width: 60px;
   height: 24px;
@@ -204,7 +220,7 @@ header nav ul li a.nav-active {
   top: 2px;
   width: 12px;
   height: 12px;
-  color: white;
+  color: var(--foreground-accent);
   z-index: 1;
 }
 
@@ -214,14 +230,16 @@ header nav ul li a.nav-active {
   cursor: pointer;
   height: 100%;
   width: 100%;
-  background-color: grey;
+  background-color: var(--foreground-primary);
   -webkit-transition: 0.4s;
   transition: 0.4s;
+  border-radius: 4px;
 }
 
 /* Create slider button */
 .slider:before {
   position: absolute;
+  cursor: pointer;
   content: "";
   height: 16px;
   width: 26px;
