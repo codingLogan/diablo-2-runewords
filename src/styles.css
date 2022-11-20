@@ -37,6 +37,11 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--background-primary);
+  background-image: url("images/background.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed;
   color: var(--text-primary);
   font-family: Arial, Helvetica, Sans-Serif;
 }
