@@ -3,7 +3,7 @@
   --background-secondary: darkgray;
   --background-accent: red;
 
-  --background-red-primary: #20100a;
+  --background-red-primary: #311210;
 
   --foreground-primary: grey;
   --foreground-secondary: black;
@@ -18,7 +18,7 @@
   --link-text-active-primary: red;
   --link-text-active-secondary: #820000;
 
-  --card-background: #20100a;
+  --card-background: #311210;
   --card-foreground: white;
 
   --toggle-selected: #4466ff;
@@ -37,11 +37,7 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--background-primary);
-  background-image: url("images/background.png");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  background-attachment: fixed;
+  background-image: url("images/bricks.png");
   color: var(--text-primary);
   font-family: Arial, Helvetica, Sans-Serif;
 }
@@ -127,7 +123,8 @@ a {
   color: var(--card-foreground);
   padding: var(--spacing-tiny);
   cursor: pointer;
-  border: 1px solid var(--link-text-active-secondary);
+  border: 1px outset var(--link-text-active-secondary);
+  border-radius: 4px;
 }
 
 .flex-apart {
@@ -158,6 +155,8 @@ a {
   border-top: none;
   padding: var(--spacing-xtiny);
   color: var(--text-secondary);
+  background-size: cover;
+  background-image: url(images/background.png);
 }
 
 /* Navigation styles */
