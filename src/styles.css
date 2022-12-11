@@ -37,7 +37,6 @@ body {
   display: flex;
   flex-direction: column;
   background-color: var(--background-primary);
-  background-image: url("images/bricks.png");
   color: var(--text-primary);
   font-family: Arial, Helvetica, Sans-Serif;
 }

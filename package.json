@@ -5,8 +5,11 @@
   "source": "src/index.html",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "dev": "parcel --dist-dir docs",
-    "build": "parcel build --dist-dir docs --public-url https://codinglogan.github.io/diablo-2-runewords/"
+    "dev": "npm run clean & parcel --dist-dir docs",
+    "build": "npm run clean & parcel build --dist-dir docs --public-url https://codinglogan.github.io/diablo-2-runewords/",
+    "remove-docs": "powershell rd docs -r -Force -ErrorAction Ignore",
+    "remove-cache": "powershell rd .parcel-cache -r -Force -ErrorAction Ignore",
+    "clean": "npm run remove-docs & npm run remove-cache"
   },
   "author": "codingLogan",
   "license": "ISC",
