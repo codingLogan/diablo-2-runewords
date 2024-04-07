@@ -1,0 +1,13 @@
+{
+    "name": "D2 Runewords",
+    "icons": [
+      {
+        "src": "./images/favicon-144.png",
+        "type": "image/png",
+        "sizes": "144x144"
+      }
+    ],
+    "start_url": "https://codinglogan.github.io/diablo-2-runewords/",
+    "display": "fullscreen"
+}
+  
