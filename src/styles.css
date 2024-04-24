@@ -59,7 +59,7 @@ button {
 
 button.active {
   background-color: var(--link-text-active-secondary);
-  color: var(--text-accent);
+  color: lightgray;
 }
 
 ul {
@@ -77,7 +77,7 @@ header {
 }
 
 header a {
-  color: var(--link-text-active-secondary);
+  color: var(--text-accent);
 }
 
 header h1 {
