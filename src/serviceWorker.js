@@ -1,6 +1,11 @@
 const addResourcesToCache = async (resources) => {
     const cache = await caches.open("v1");
-    await cache.addAll(resources);
+    try {
+        await cache.addAll(resources);
+    } catch (e) {
+        console.log("Cache failed", {error: e})
+        console.error("Failure building cache")
+    }
 };
   
 try {
