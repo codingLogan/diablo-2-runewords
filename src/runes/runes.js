@@ -4,53 +4,51 @@ function runeList(runes) {
   const list = document.createElement("ul");
 
   runes.forEach((rune) => {
-    //   if (rune.filtered === false) {
     list.appendChild(runeItem(rune));
-    //   }
   });
 
   return list;
 }
 
 function runeItem({ image, name, weapon, armor, level, recipe }) {
-  const item = document.createElement("li");
+  // Create the runeImageNode
+  const runeImageNode = document.createElement("img");
+  runeImageNode.src = `./images/runes/${name.toLowerCase()}.webp`;
 
-  const itemHeader = document.createElement("div");
-  itemHeader.classList.add("header-block");
+  // Create the title and level nodes, in their own div
+  const nameTitleNode = document.createElement("h3");
+  nameTitleNode.innerText = name;
 
-  const toggleHidden = (event) => {
-    event.currentTarget.nextSibling.hidden =
-      !event.currentTarget.nextSibling.hidden;
-  };
-  itemHeader.onclick = toggleHidden;
-  item.appendChild(itemHeader);
+  const levelNode = document.createElement("span");
+  levelNode.innerText = `Level ${level}`;
 
-  // Title Container
-  const titleDiv = document.createElement("div");
-  titleDiv.classList.add("flex-apart");
-  itemHeader.appendChild(titleDiv);
+  const titleLevelNodes = document.createElement("div");
+  titleLevelNodes.appendChild(nameTitleNode);
+  titleLevelNodes.appendChild(levelNode);
 
-  // Title Row
-  const titleLeft = document.createElement("h3");
-  titleLeft.innerText = name;
-  titleDiv.appendChild(titleLeft);
+  // Create the runeIngredients node
+  const runeIngredientsNode = document.createElement("span");
+  runeIngredientsNode.innerText = recipe;
 
-  const titleRight = document.createElement("span");
-  titleRight.innerText = recipe;
-  titleDiv.appendChild(titleRight);
+  // Organize the pieces into the list
+  const listItemNode = document.createElement("li");
+  const listItemContentNode = document.createElement("div");
+  const listItemContentLeftNode = document.createElement("div");
+  listItemContentLeftNode.appendChild(runeImageNode);
+  listItemContentLeftNode.appendChild(titleLevelNodes);
 
-  // Subtitle Row
-  const subtitleDiv = document.createElement("div");
-  subtitleDiv.classList.add("flex-apart");
-  itemHeader.appendChild(subtitleDiv);
+  const listItemContentRightNode = document.createElement("div");
+  listItemContentRightNode.appendChild(runeIngredientsNode);
 
-  const subtitleLeft = document.createElement("span");
-  subtitleLeft.innerText = `Level ${level}`;
-  subtitleDiv.appendChild(subtitleLeft);
+  listItemNode.appendChild(listItemContentNode);
+  listItemContentNode.appendChild(listItemContentLeftNode);
+  listItemContentNode.appendChild(listItemContentRightNode);
 
-  //   const subtitleRight = document.createElement("span");
-  //   subtitleRight.innerText = recipe;
-  //   subtitleDiv.appendChild(subtitleRight);
+  // Styles
+  listItemContentNode.classList.add("header-block");
+  listItemContentNode.classList.add("flex-apart");
+  listItemContentLeftNode.style.setProperty("display", "flex");
+  titleLevelNodes.style.setProperty("padding-left", "8px");
 
   // List of Effects for armor and weapons
   const effectList = document.createElement("ul");
@@ -67,10 +65,16 @@ function runeItem({ image, name, weapon, armor, level, recipe }) {
   weaponEffect.innerText = "Weapon: " + weapon;
   effectList.appendChild(weaponEffect);
 
-  item.appendChild(effectList);
+  listItemNode.appendChild(effectList);
 
-  // Return the item for the code to do something with it
-  return item;
+  const toggleHidden = (event) => {
+    console.log("hidden", event.currentTarget.hidden);
+    event.currentTarget.nextSibling.hidden =
+      !event.currentTarget.nextSibling.hidden;
+  };
+  listItemContentNode.onclick = toggleHidden;
+
+  return listItemNode;
 }
 
 // Attach the list to the correct place
