@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "dev": "npm run clean && parcel --dist-dir docs && cp -r src/images docs/images",
-    "build": "npm run clean && parcel build --dist-dir docs --public-url https://codinglogan.github.io/diablo-2-runewords/ && cp -r src/images docs/images",
+    "build": "npm run clean && parcel build --dist-dir docs --public-url https://codinglogan.dev/diablo-2-runewords/ && cp -r src/images docs/images",
     "remove-docs-powershell": "powershell rd docs -r -Force -ErrorAction Ignore",
     "remove-docs": "rm -rf docs",
     "remove-cache-powershell": "powershell rd .parcel-cache -r -Force -ErrorAction Ignore",

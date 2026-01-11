@@ -1,0 +1,2 @@
+var e={};e=import.meta.resolve("aJu45"),(async()=>{if("serviceWorker"in navigator)try{let r=await navigator.serviceWorker.register(e);r.installing?console.log("Service worker installing"):r.waiting?console.log("Service worker installed"):r.active&&console.log("Service worker active")}catch(e){console.error(`Registration failed with ${e}`)}})();
+//# sourceMappingURL=diablo-2-runewords.bbcbee46.js.map
