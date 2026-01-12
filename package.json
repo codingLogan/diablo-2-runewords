@@ -5,7 +5,7 @@
   "source": "src/index.html",
   "scripts": {
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "dev": "npm run clean && parcel --dist-dir docs && cp -r src/images docs/images",
+    "dev": "npm run clean && parcel build --dist-dir docs && cp -r src/images docs/images && npx http-server docs",
     "build": "npm run clean && parcel build --dist-dir docs --public-url https://runewords.codinglogan.dev/ && cp -r src/images docs/images",
     "remove-docs-powershell": "powershell rd docs -r -Force -ErrorAction Ignore",
     "remove-docs": "rm -rf docs",
@@ -19,6 +19,7 @@
   "devDependencies": {
     "@parcel/packager-raw-url": "^2.7.0",
     "@parcel/transformer-webmanifest": "^2.7.0",
+    "http-server": "^14.1.1",
     "jest": "^27.2.5",
     "parcel": "^2.7.0"
   },
